@@ -1,0 +1,119 @@
+/* oneComplaint */
+.bardiv{
+    width:5vw;
+    height:auto;
+    border:none;
+   background-color:transparent;
+    display:flex;
+    cursor: pointer;
+    align-items:center;
+    justify-content:start; 
+}
+.comp{
+    height:auto;
+    border:none;
+   background-color:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:start; 
+    width: 35vw;
+    height: 5vh;
+    cursor: pointer;
+    line-height: 20px;
+    overflow: hidden;
+}
+/*  */
+.About_Us_part1 {
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .About_Uspart1techfest_logo {
+    display: flex;
+    flex-grow: 0.1;
+    border-right: 2px solid blue;
+  }
+  
+  .About_Uspart1techfest_logo img {
+    height: 250px;
+    width: 300px;
+  }
+  
+  .About_Uspart1SLIET_logo img {
+    height: 260px;
+    width: 270px;
+  }
+  
+  .About_Uspart1SLIET_logo {
+    display: flex;
+    justify-content: center;
+    flex-grow: 0.1;
+  }
+  
+@media only screen and (max-width: 800px) {
+    .comp{
+        width: 25vw;
+    }
+    .no{
+        width: 1vw;
+    }
+}
+@media only screen and (max-width: 590px) {
+    .comp{
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 769px) {
+    .About_Uspart1techfest_logo img {
+      height: 200px;
+      width: 250px;
+    }
+  
+    .About_Uspart1SLIET_logo img {
+      height: 210px;
+      width: 220px;
+    }
+  }
+
+  @media only screen and (max-width: 575px) {
+
+    .About_Uspart1techfest_logo img {
+      height: 170px;
+      width: 220px;
+    }
+  
+    .About_Uspart1SLIET_logo img {
+      height: 180px;
+      width: 190px;
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    .About_Us_part1 {
+        justify-content: center;
+        align-items: center;
+        padding-top: 4rem;
+        flex-direction: column;
+      }
+    
+      .About_Uspart1techfest_logo {
+        border-right: none;
+        margin-bottom: 5%;
+      }
+    
+      .About_Uspart1techfest_logo img {
+        height: auto;
+        width: 270px;
+        margin-right: 0;
+      }
+    
+      .About_Uspart1SLIET_logo img {
+        margin-left: 0;
+        height: auto;
+        width: 250px;
+      }
+}

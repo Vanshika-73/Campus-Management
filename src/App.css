@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.profileCard{
+  height: 80%;
+  max-width: 80vw;
+}
+/* navbar */
+.menuSliderContainer{
+  width: 250px;
+    background: #511;
+    height: 100%;
+}
+.listItem{
+  color: tan;
+}
+/* .complaintTable tr th{
+  margin-right: 30px;
+} */
+@media only screen and (max-width:780px) {
+  .profileCard{
+    height: 90%;
+  }
+}
+@media only screen and (max-width:420px) {
+  .profileCard{
+    height: 95%;
+    max-width: 100%;
+  }
+}
