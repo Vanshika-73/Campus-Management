@@ -19,6 +19,8 @@ import Landing from './components/Landing';
 import ComplaintDetailSupervisor from './components/ComplaintDetailSupervisor';
 import ComplaintDetail from './components/ComplaintDetail';
 import UserView from './Pages/admin panel/UsersView';
+import User from './Pages/admin panel/User';
+import UserAdd from './Pages/admin panel/UserAdd';
 const App=()=> {
   const { role } = useSelector((state) => state.user);
  
@@ -40,6 +42,15 @@ const App=()=> {
         <Route path='/users' element={<UserView/>}/>
         {
           (role=='Admin') ?   (<Route path='/inbox' element={<InboxAdmin/>}/>) :   <Route path='/inbox' element={<InboxSupervisor/>}/>
+        }
+        {
+          (role=='Admin') ?   (<Route path='/usersview' element={<UserView/>}/>) :   ""
+        }
+        {
+          (role=='Admin') ?   (<Route path='/users/:username' element={<User/>}/>) :   ""
+        }
+        {
+          (role=='Admin') ?   (<Route path='/useradd' element={<UserAdd/>}/>) :   ""
         }
         {
            (role=='Admin') ? (<Route path='/history' element={ <HistoryAdmin/>} />) :" "

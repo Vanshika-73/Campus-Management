@@ -5,8 +5,7 @@ import {WorkHistorySharp,PersonRounded, LoginOutlined, AddCircle, RoofingOutline
 import {AppBar,Toolbar, Avatar, Box, Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles,CssBaseline, Drawer,  Typography} from "@mui/material";
 import {Apps, Menu, ContactMail, AssignmentInd, Home} from "@mui/icons-material";
 import { useSelector } from "react-redux";
-
-
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 const listItems = [
   {
     listIcon: <AddCircle />,
@@ -30,6 +29,34 @@ const listItems = [
   }
 ];
 const listItemsAdmin = [
+  {
+    listIcon: <AdminPanelSettingsIcon />,
+    listText: "Admin Panel",
+    navi:'/usersview'
+  },
+  {
+    listIcon: <RoofingOutlined />,
+    listText: "Inbox",
+    navi:'/inbox'
+
+  },
+  {
+    listIcon: <WorkHistorySharp />,
+    listText: "History",
+    navi:'/history'
+  },
+  {
+    listIcon: <PersonRounded />,
+    listText: "Profile",
+    navi:'/profile'
+  },
+  {
+    listIcon: <LoginOutlined />,
+    listText: "Logout",
+    navi:'/logout'
+  },
+];
+const listItemsSupervisor = [
   {
     listIcon: <RoofingOutlined />,
     listText: "Inbox",
@@ -66,25 +93,31 @@ export default function Navbar() {
   const sideList = () => (
     <Box className="menuSliderContainer" component="div">
       <Divider />
-      <List sx={{pt:14,pl:2}}>
-        {
-          (role==="Professor")? listItems.map((listItem, index) => (
-            <ListItem className="listItem" button key={index} onClick={()=>navigate(listItem.navi)}>
-              <ListItemIcon sx={{color:"tan"}} className="listItem">
-                {listItem.listIcon}
-              </ListItemIcon>
-              <ListItemText className="listItem" primary={listItem.listText} />
-            </ListItem>
-          )) : 
-          listItemsAdmin.map((listItem, index) => (
-            <ListItem className="listItem" button key={index} onClick={()=>navigate(listItem.navi)}>
-              <ListItemIcon sx={{color:"tan"}}  className="listItem">
-                {listItem.listIcon}
-              </ListItemIcon>
-              <ListItemText className="listItem" primary={listItem.listText} />
-            </ListItem>
-          ))
-        }
+      <List sx={{pt:14,pl:2}}> 
+      {
+        (role==="Professor") ? (listItems.map((listItem, index) => (
+          <ListItem className="listItem" button key={index} onClick={()=>navigate(listItem.navi)}>
+            <ListItemIcon sx={{color:"tan"}} className="listItem">
+              {listItem.listIcon}
+            </ListItemIcon>
+            <ListItemText className="listItem" primary={listItem.listText} />
+          </ListItem>
+        )) ) : ((role==="Supervisor") ? listItemsSupervisor.map((listItem, index) => (
+          <ListItem className="listItem" button key={index} onClick={()=>navigate(listItem.navi)}>
+            <ListItemIcon sx={{color:"tan"}} className="listItem">
+              {listItem.listIcon}
+            </ListItemIcon>
+            <ListItemText className="listItem" primary={listItem.listText} />
+          </ListItem>
+        )) : listItemsAdmin.map((listItem, index) => (
+          <ListItem className="listItem" button key={index} onClick={()=>navigate(listItem.navi)}>
+            <ListItemIcon sx={{color:"tan"}} className="listItem">
+              {listItem.listIcon}
+            </ListItemIcon>
+            <ListItemText className="listItem" primary={listItem.listText} />
+          </ListItem>
+        ))  )
+      }
       </List>
     </Box>
   );

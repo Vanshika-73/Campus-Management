@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DataTable, { createTheme } from "react-data-table-component";
+import axios from "axios";
 const UserView = () => {
-  const [workshops, setWorkshops] = useState(null);
+  const [users, setUsers] = useState(null);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
- 
+ useEffect(()=>{
+  axios.get("http://localhost:1111/users/").then((res)=>{
+    setUsers(res.data);
+  })
+ },[])
+ const deleteUser = async (username) => {
+  console.log("deke",username);
+  await axios.delete(`http://localhost:1111/users/${username}`,).then((result) => {
+    if (result.status === 200) {
+      alert("user deleted!");
+      window.location.reload(false);
+      // navigate('/home');
+    }
+  });
+};
   createTheme(
     "solarized",
     {
@@ -14,7 +28,7 @@ const UserView = () => {
         secondary: "white",
       },
       background: {
-        default: "black",
+        default: "#5c6bc0",
       },
     },
     "dark"
@@ -22,28 +36,20 @@ const UserView = () => {
 
   const columns = [
     {
-      name: "iD",
-      selector: (row) => row.id,
+      name:"Id",
+      selector : (row) => row.id,
     },
     {
       name: "User Name",
-      selector: (row) => row.workshopName,
+      selector: (row) => row.name,
     },
     {
-      name: "Date",
-      selector: (row) => row.date,
+      name: "Role",
+      selector: (row) => row.role,
     },
     {
-      name: "Time",
-      selector: (row) => row.time,
-    },
-    {
-      name: "Domain",
-      selector: (row) => row.domain,
-    },
-    {
-      name: "Venue",
-      selector: (row) => row.venue,
+      name: "Email",
+      selector: (row) => row.email,
     },
     {
       name: "View",
@@ -51,21 +57,39 @@ const UserView = () => {
         <button
           className="btn"
           onClick={() => {
-            navigate(`/workshop/${row.id}`);
+            navigate(`/users/${row.name}`);
           }}
         >
           View
         </button>
       ),
     },
-   
+    {
+      name: "Delete",
+      cell: (row) => (
+        <button
+          className="btn_delete"
+          onClick={() => deleteUser(row.name)}
+        >
+          Delete
+        </button>
+      ),
+    },
          
 ]
 
-const data = [{
-    iD: "name",
-    Domain: "email"
-}]
+const data = [];
+let i = 1;
+users?.map((user) => {
+  const work = {
+    id:i,
+    name: user.username,
+    email: user.user_email,
+    role: user.role,
+  };
+  i++;
+  return data.push(work);
+});
   return (
     <>
       
@@ -91,8 +115,8 @@ const data = [{
             borderRadius: "8px",
           }}
         >
-          <Link to="/workshopadd">
-            <button type="button">Add New Workshop</button>
+          <Link to="/useradd">
+            <button type="button">Add New User</button>
           </Link>
         </div>
 
