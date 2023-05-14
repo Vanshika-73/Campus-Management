@@ -89,7 +89,6 @@ export default function Navbar() {
   const toggleSlider = () => {
     setOpen(!open);
   };
-
   const sideList = () => (
     <Box className="menuSliderContainer" component="div">
       <Divider />
@@ -132,8 +131,8 @@ export default function Navbar() {
             <IconButton onClick={toggleSlider}>
               <Menu />
             </IconButton>
-            <Typography>Campus Management</Typography>
-            <Drawer open={open} anchor="right" onClose={toggleSlider}>
+            <Typography onClick={()=>navigate('/')} style={{cursor:"pointer"}}>Campus Management</Typography>
+            <Drawer open={open} anchor="left" onClose={toggleSlider}>
               {sideList()}
             </Drawer>
           </Toolbar>
