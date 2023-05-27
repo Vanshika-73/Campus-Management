@@ -16,9 +16,18 @@ const UserAdd = () => {
   const [dept, setDept] = useState("dept");
   const [phoneErr,setPhoneErr] = useState("");
   const [err,setErr] = useState("");
+  const [password,setPassword] = useState("");
   const navigate=useNavigate();
   const postData = async() => {
     const formData = new FormData();
+    if(name=="" || photo==null || email=="" || contact==false || role=='0' || password==""){
+      alert("Please fill all the required fields");
+      return;
+    }
+    if(role=="Supervisor" &&  dept=="dept"){
+      alert("Please choose the department for the supervisor");
+      return;
+    }
     if (contact.length < 10) {
       setPhoneErr("Invalid phone number!");
       setTimeout(() => {
@@ -38,19 +47,22 @@ const UserAdd = () => {
     formData.append("userPhoto",photo);
     formData.append("phone",Number(contact));
     formData.append("email",email);
-    const user ={
-      name:name,
-      role:role,
-      user_img:photo,
-      phone:contact,
-      email:email
-    }
+    formData.append("password",password);
+    formData.append("dept",dept);
+    // const user ={
+    //   name:name,
+    //   role:role,
+    //   user_img:photo,
+    //   phone:contact,
+    //   email:email
+    // }
     await axios.post("http://localhost:1111/users",formData).then((res)=>{
       console.log("user",res);
       if(res.status==208){
         setErr(res.data.message);
       setTimeout(() => {
         setErr(null);
+        navigate("/usersview")
       }, 3000);
       return;
       }
@@ -75,7 +87,7 @@ const UserAdd = () => {
       </div>
 
       <div className="workshopItems" style={{display:"flex",justifyContent:"space-evenly",alignItems:"baseline",flexDirection:"column",height:"50vh",width:"80%",paddingLeft:"30%"}}>
-      {err && <h6 style={{color:"red"}}>{err}</h6>}
+      {err && <h2 style={{color:"red"}}>{err}</h2>}
         <label>
           Name :{" "}
           <input
@@ -104,6 +116,15 @@ const UserAdd = () => {
           />
         </label>
         {phoneErr && <h6 style={{color:"red"}}>{phoneErr}</h6>}
+        <label>
+          Password :{" "}
+          <input
+            type="text"
+            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            required
+          />
+        </label>
         <label>Choose Role : 
         <select
           id="role"
