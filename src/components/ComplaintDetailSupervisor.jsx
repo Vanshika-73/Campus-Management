@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { fetchSingleComplaint } from "../slices/complaintSlice";
+import { fetchSingleComplaint, updateComplaint } from "../slices/complaintSlice";
 import ReactToPrint from "react-to-print";
 
 function ComplaintDetailSupervisor() {
@@ -19,13 +19,13 @@ function ComplaintDetailSupervisor() {
   const {complaint} = useSelector(state=>state.complaints);
 
   const handleSubmit = () =>{
-    axios({
-        method:"put",
-        url:`http://localhost:1111/complaints/${id}`,
-        data:{
-          status:status,
-        }   
-    })
+    let data = {
+      id:id,
+      data:{
+        status:status,
+      }  
+    }
+    dispatch(updateComplaint(data));
     setStatus(null);
      navi(-1)
   }

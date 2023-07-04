@@ -16,7 +16,7 @@ export default function Profile() {
         component="img"
         alt={userInfo.username}
         height="60%"
-        image={`http://localhost:1111/${userInfo.user_img}`}
+        image={`http://localhost:1111/userPhoto/${userInfo.user_img}`}
       />
       <CardContent>
         <Typography gutterBottom variant="h4" component="div" sx={{textAlign:"center"}}>

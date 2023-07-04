@@ -82,8 +82,6 @@ const listItemsSupervisor = [
 export default function Navbar() {
   const navigate = useNavigate()
   const { role } = useSelector((state) => state.user);
-  console.log("ada",role);
-  // const classes = useStyles();
   const [open, setOpen] = useState(false);
 
   const toggleSlider = () => {

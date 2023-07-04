@@ -10,7 +10,6 @@ function ComplaintDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("det", id);
     dispatch(fetchSingleComplaint({ id }));
   }, []);
   const { complaint } = useSelector((state) => state.complaints);

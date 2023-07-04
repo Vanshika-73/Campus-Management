@@ -20,6 +20,12 @@ export const fetchSingleComplaint= createAsyncThunk("complaint/SingleComplaint",
 });
 })
 
+export const updateComplaint= createAsyncThunk("complaint/updateComplaint", ({id,data})=>{
+    return axios.put(`http://localhost:1111/complaints/${id}`,data).then((res) =>res.data).catch((err)=>{
+        throw new Error(err.response.data.message);
+});
+})
+
 
 const complaintSlice = createSlice({
     name:"complaints",
@@ -60,6 +66,20 @@ const complaintSlice = createSlice({
             state.complaint=null;
             state.error=action.error.message;
         },
+        [updateComplaint.fulfilled]: (state, action) => {
+            let { _id } = action.payload[0];
+            // console.log("payload",action.payload);
+            let index = state.allComplaints.findIndex(
+              (complaint) => complaint._id === _id
+            );
+            // console.log("index", index);
+            state.loading = false;
+            state.allComplaints[index] = action.payload[0];
+          },
+          [updateComplaint.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+          },
     }
 });
 export default complaintSlice.reducer;
