@@ -9,19 +9,19 @@ const initialState = {
 }
 
 export const fetchAllComplaints= createAsyncThunk("complaints", ()=>{
-    return axios.get("http://localhost:1111/complaints").then((res) =>res.data).catch((err)=>{
+    return axios.get("https://cms-backend-two-alpha.vercel.app/complaints").then((res) =>res.data).catch((err)=>{
         throw new Error(err.response.data.message);
 });
 })
 
 export const fetchSingleComplaint= createAsyncThunk("complaint/SingleComplaint", ({id})=>{
-    return axios.get(`http://localhost:1111/complaints/${id}`).then((res) =>res.data).catch((err)=>{
+    return axios.get(`https://cms-backend-two-alpha.vercel.app/complaints/${id}`).then((res) =>res.data).catch((err)=>{
         throw new Error(err.response.data.message);
 });
 })
 
 export const updateComplaint= createAsyncThunk("complaint/updateComplaint", ({id,data})=>{
-    return axios.put(`http://localhost:1111/complaints/${id}`,data).then((res) =>res.data).catch((err)=>{
+    return axios.put(`https://cms-backend-two-alpha.vercel.app/complaints/${id}`,data).then((res) =>res.data).catch((err)=>{
         throw new Error(err.response.data.message);
 });
 })

@@ -31,7 +31,7 @@ const Login = () => {
     const data={
       user_email: email, user_password: password
     }
-    await axios.post("http://localhost:1111/users/login",data).then((res)=>{
+    await axios.post("https://cms-backend-two-alpha.vercel.app/users/login",data).then((res)=>{
       const result = res;
       console.log("efd",result)
       if(res.status===208){
